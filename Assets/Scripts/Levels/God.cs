@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class God : MonoBehaviour
 {
+    public float forestDensity;
     public GameObject tree1;
 
     // Start is called before the first frame update
@@ -22,26 +23,23 @@ public class God : MonoBehaviour
     // Plants the initial surrounding forest
     void PlantForest()
     {
+        float terrainSize = 300.0f;
+        float treeSize = 20.0f;
+        float forestSize = forestDensity * treeSize;
         float x, z;
 
-        for (x = 320.0f, z = 320.0f; x >= -320.0f; x -= 20.0f)
+        for (x = -terrainSize - forestSize; x <= terrainSize + forestSize; x += treeSize)
         {
-            PlantTree(x, z);
-        }
-
-        for (x = -320.0f, z = -320.0f; x <= 320.0f; x += 20.0f)
-        {
-            PlantTree(x, z);
-        }
-
-        for (x = 320.0f, z = 300.0f; z >= -300.0f; z -= 20.0f)
-        {
-            PlantTree(x, z);
-        }
-
-        for (x = -320.0f, z = 300.0f; z >= -300.0f; z -= 20.0f)
-        {
-            PlantTree(x, z);
+            for (z = -terrainSize - forestSize; z <= terrainSize + forestSize; z += treeSize)
+            {
+                if (x <= -terrainSize || x >= terrainSize || z <= -terrainSize || z >= terrainSize)
+                {
+                    if (Random.Range(0.0f, 1.0f) < 0.8f)
+                    {
+                        PlantTree(x, z);
+                    }
+                }
+            }
         }
     }
 
