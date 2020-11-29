@@ -1,26 +1,11 @@
 fileFormatVersion: 2
-guid: a84d273b17c33ac4da292b7e791de1a3
+guid: 23841e95fb0ddb14b96cccf67eeacb29
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1989289236423521904
     second: Default Take
-  - first:
-      74: -3100369314251171874
-    second: Idle
-  - first:
-      74: -5225591888644748974
-    second: Rest
-  - first:
-      74: 2667949614841947897
-    second: Walk
-  - first:
-      74: -1620523437437243029
-    second: WalkAiming
-  - first:
-      74: -3411655199097178848
-    second: IdleAiming
   externalObjects: {}
   materials:
     materialImportMode: 1
