@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Controls : MonoBehaviour
 {
+    const int TERRAIN_PLANE_LAYER_MASK = 1 << 8;
+
     public GameObject character;
+    public GameObject indicator;
     public InputAction move;
     public InputAction lookX;
     public InputAction lookY;
@@ -64,11 +67,32 @@ public class Controls : MonoBehaviour
     // Updates the player's character look based on the look controls input
     void UpdateLook()
     {
-        float mouseX = lookX.ReadValue<float>() - halfScreenWidth;
-        float mouseY = lookY.ReadValue<float>() - halfScreenHeight;
+        float mouseX = lookX.ReadValue<float>();
+        float mouseY = lookY.ReadValue<float>();
 
-        var target = new Vector3(-mouseX, 0.0f, -mouseY);
+        var target = new Vector3(
+            -mouseX + halfScreenWidth,
+            0.0f,
+            -mouseY + halfScreenHeight
+        );
+
         character.transform.LookAt(character.transform.position + target);
+
+        // Updates the indicator's position:
+        var ray = Camera.main.ScreenPointToRay(new Vector3(mouseX, mouseY, 0.0f));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, TERRAIN_PLANE_LAYER_MASK))
+        {
+            float indicatorX = Mathf.Floor(hit.point.x / 10.0f) * 10.0f + 5.0f;
+            float indicatorZ = Mathf.Floor(hit.point.z / 10.0f) * 10.0f + 5.0f;
+
+            indicator.transform.position = new Vector3(
+                indicatorX,
+                indicator.transform.position.y,
+                indicatorZ
+            );
+        }
     }
 
     void OnEnable()
