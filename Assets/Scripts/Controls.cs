@@ -9,16 +9,20 @@ public class Controls : MonoBehaviour
 
     public GameObject character;
     public GameObject indicator;
+    public GameObject gun;
+    public GameObject axe;
+    public GameObject sheathedAxe;
+    public GameObject sheathedGun;
     public InputAction move;
     public InputAction lookX;
     public InputAction lookY;
+    public InputAction melee;
 
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
 
     private CharacterController _characterController;
     private Animator _animator;
-    private bool _moving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +42,7 @@ public class Controls : MonoBehaviour
     void UpdateMove()
     {
         var inputVector = move.ReadValue<Vector2>();
+        float meleeing = melee.ReadValue<float>();
         var finalVector = new Vector3();
 
         finalVector.x = inputVector.x;
@@ -45,22 +50,34 @@ public class Controls : MonoBehaviour
 
         _characterController.Move(-finalVector * Time.deltaTime * 30.0f);
 
-        // Updates the character's movement animation:
-        if (inputVector.x == 0.0f && inputVector.y == 0.0f)
+        // Check if character is meleeing:
+        if (meleeing == 0.0f)
         {
-            if (_moving)
+            // Cancel the melee:
+            axe.SetActive(false);
+            sheathedGun.SetActive(false);
+            sheathedAxe.SetActive(true);
+            gun.SetActive(true);
+
+            // Updates the character's movement animation:
+            if (inputVector.x == 0.0f && inputVector.y == 0.0f)
             {
-                _moving = false;
                 _animator.Play("Idle Aiming");
+            }
+            else
+            {
+                _animator.Play("Walk Aiming");
             }
         }
         else
         {
-            if (!_moving)
-            {
-                _moving = true;
-                _animator.Play("Walk Aiming");
-            }
+            // Melee:
+            gun.SetActive(false);
+            sheathedAxe.SetActive(false);
+            sheathedGun.SetActive(true);
+            axe.SetActive(true);
+
+            _animator.Play("Melee");
         }
     }
 
@@ -100,6 +117,7 @@ public class Controls : MonoBehaviour
         move.Enable();
         lookX.Enable();
         lookY.Enable();
+        melee.Enable();
     }
 
     void OnDisable()
@@ -107,5 +125,6 @@ public class Controls : MonoBehaviour
         move.Disable();
         lookX.Disable();
         lookY.Disable();
+        melee.Disable();
     }
 }
