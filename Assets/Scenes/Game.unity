@@ -193,6 +193,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &406938042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406938036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbfd3acc062e63488b71291cc541bba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeing: 0
 --- !u!4 &442509867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5574657383665397177, guid: a84d273b17c33ac4da292b7e791de1a3,
@@ -441,7 +454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forestDensity: 4
-  tree1: {fileID: 1685573734760592031, guid: 7d89e6d2a9c5a3a4c96828610a1d2b79, type: 3}
+  tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
+    type: 3}
+  tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
 --- !u!1 &902065545
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a84d273b17c33ac4da292b7e791de1a3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84d273b17c33ac4da292b7e791de1a3, type: 3}

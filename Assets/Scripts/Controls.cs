@@ -21,12 +21,14 @@ public class Controls : MonoBehaviour
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
 
+    private Character _character;
     private CharacterController _characterController;
     private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        _character = character.GetComponent<Character>();
         _characterController = character.GetComponent<CharacterController>();
         _animator = character.GetComponent<Animator>();
     }
@@ -53,6 +55,8 @@ public class Controls : MonoBehaviour
         // Check if character is meleeing:
         if (meleeing == 0.0f)
         {
+            _character.meleeing = false;
+
             // Cancel the melee:
             axe.SetActive(false);
             sheathedGun.SetActive(false);
@@ -71,6 +75,8 @@ public class Controls : MonoBehaviour
         }
         else
         {
+            _character.meleeing = true;
+
             // Melee:
             gun.SetActive(false);
             sheathedAxe.SetActive(false);
