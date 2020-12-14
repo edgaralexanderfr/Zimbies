@@ -2,9 +2,9 @@
   "dependencies": {
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ide.rider": "1.1.4",
-    "com.unity.ide.vscode": "1.2.0",
+    "com.unity.ide.vscode": "1.2.3",
     "com.unity.inputsystem": "1.0.1",
-    "com.unity.test-framework": "1.1.13",
+    "com.unity.test-framework": "1.1.19",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.2.14",
     "com.unity.ugui": "1.0.0",
@@ -40,11 +40,5 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  },
-  "lock": {
-    "com.xeleh.enhancer": {
-      "revision": "HEAD",
-      "hash": "78e062bf5467bb3a4caae6315aaf74352050d116"
-    }
   }
 }
