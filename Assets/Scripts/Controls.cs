@@ -2,35 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
     const int TERRAIN_PLANE_LAYER_MASK = 1 << 8;
 
+    public GameObject god;
     public GameObject character;
     public GameObject indicator;
     public GameObject gun;
     public GameObject axe;
     public GameObject sheathedAxe;
     public GameObject sheathedGun;
+    public InputField console;
     public InputAction move;
     public InputAction lookX;
     public InputAction lookY;
     public InputAction melee;
+    public InputAction toggleConsole;
+    public InputAction enter;
 
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
 
+    private God _god;
     private Character _character;
     private CharacterController _characterController;
     private Animator _animator;
+    private RectTransform _consoleRectTransform;
+    private bool _console = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        _god = god.GetComponent<God>();
         _character = character.GetComponent<Character>();
         _characterController = character.GetComponent<CharacterController>();
         _animator = character.GetComponent<Animator>();
+        _consoleRectTransform = console.GetComponent<RectTransform>();
+
+        // Set console placeholder:
+        console.placeholder.GetComponent<Text>().text += " v" + Application.version;
+
+        AddEvents();
+    }
+
+    void AddEvents()
+    {
+        // Console events:
+        toggleConsole.performed += OnToggleConsolePerformed;
+
+        enter.canceled += OnEnterCanceled;
     }
 
     // Update is called once per frame
@@ -118,12 +141,63 @@ public class Controls : MonoBehaviour
         }
     }
 
+    void OnToggleConsolePerformed(InputAction.CallbackContext ctx)
+    {
+        _console = !_console;
+
+        if (_console)
+        {
+            console.ActivateInputField();
+            _consoleRectTransform.localPosition -= Vector3.up * 100;
+
+            move.Disable();
+            melee.Disable();
+        }
+        else
+        {
+            // TODO: refactor repeated code:
+            console.DeactivateInputField();
+            _consoleRectTransform.localPosition += Vector3.up * 100;
+
+            move.Enable();
+            melee.Enable();
+        }
+    }
+
+    void OnEnterCanceled(InputAction.CallbackContext ctx)
+    {
+        if (_console)
+        {
+            // Catch the command:
+            string command = console.text.ToLower();
+            console.text = "";
+
+            // TODO: refactor repeated code:
+            console.DeactivateInputField();
+            _consoleRectTransform.localPosition += Vector3.up * 100;
+            _console = false;
+
+            move.Enable();
+            melee.Enable();
+
+            // Execute the command:
+            switch (command)
+            {
+                case "plant pine":
+                    _god.PlantTree(indicator.transform.position.x, indicator.transform.position.z);
+                    break;
+            }
+        }
+    }
+
     void OnEnable()
     {
         move.Enable();
         lookX.Enable();
         lookY.Enable();
         melee.Enable();
+        toggleConsole.Enable();
+        enter.Enable();
     }
 
     void OnDisable()
@@ -132,5 +206,7 @@ public class Controls : MonoBehaviour
         lookX.Disable();
         lookY.Disable();
         melee.Disable();
+        toggleConsole.Disable();
+        enter.Disable();
     }
 }

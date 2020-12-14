@@ -66,7 +66,7 @@ public class God : MonoBehaviour
         Instantiate(tree1Static, new Vector3(x, tree1Static.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
     }
 
-    void PlantTree(float x, float z)
+    public void PlantTree(float x, float z)
     {
         Instantiate(tree1, new Vector3(x, tree1.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
     }
