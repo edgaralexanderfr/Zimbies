@@ -677,6 +677,8 @@ MonoBehaviour:
   tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
     type: 3}
   tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
+  woodenWall: {fileID: 5127394394141839190, guid: 041dfd6cda9398b458bd65da9d290102,
+    type: 3}
 --- !u!1 &902065545
 GameObject:
   m_ObjectHideFlags: 0

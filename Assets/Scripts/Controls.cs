@@ -183,8 +183,22 @@ public class Controls : MonoBehaviour
             // Execute the command:
             switch (command)
             {
+                case "pp":
                 case "plant pine":
                     _god.PlantTree(indicator.transform.position.x, indicator.transform.position.z);
+                    break;
+                case "gw":
+                case "give wood":
+                    _character.inventory.wood += 9;
+                    break;
+                case "cww":
+                case "craft wooden wall":
+                    if (_character.inventory.wood >= 3)
+                    {
+                        // _god.CraftWoodenWall(indicator.transform.position.x + -4.0f, indicator.transform.position.z + 4.0f);
+                        _god.CraftWoodenWall(indicator.transform.position.x, indicator.transform.position.z);
+                        _character.inventory.wood -= 3;
+                    }
                     break;
             }
         }

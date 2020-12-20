@@ -7,6 +7,7 @@ public class God : MonoBehaviour
     public float forestDensity;
     public GameObject tree1Static;
     public GameObject tree1;
+    public GameObject woodenWall;
 
     // Start is called before the first frame update
     void Start()
@@ -69,5 +70,10 @@ public class God : MonoBehaviour
     public void PlantTree(float x, float z)
     {
         Instantiate(tree1, new Vector3(x, tree1.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
+    }
+
+    public void CraftWoodenWall(float x, float z)
+    {
+        Instantiate(woodenWall, new Vector3(x, woodenWall.transform.position.y, z), Quaternion.identity);
     }
 }
