@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
-    const int TERRAIN_PLANE_LAYER_MASK = 1 << 8;
-
-    public GameObject god;
     public GameObject character;
     public GameObject indicator;
     public GameObject gun;
@@ -26,7 +23,6 @@ public class Controls : MonoBehaviour
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
 
-    private God _god;
     private Character _character;
     private CharacterController _characterController;
     private Animator _animator;
@@ -36,7 +32,6 @@ public class Controls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _god = god.GetComponent<God>();
         _character = character.GetComponent<Character>();
         _characterController = character.GetComponent<CharacterController>();
         _animator = character.GetComponent<Animator>();
@@ -128,7 +123,7 @@ public class Controls : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(new Vector3(mouseX, mouseY, 0.0f));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, TERRAIN_PLANE_LAYER_MASK))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, TerrainPlane.LAYER_MASK))
         {
             float indicatorX = Mathf.Floor(hit.point.x / 10.0f) * 10.0f + 5.0f;
             float indicatorZ = Mathf.Floor(hit.point.z / 10.0f) * 10.0f + 5.0f;
@@ -185,7 +180,7 @@ public class Controls : MonoBehaviour
             {
                 case "pp":
                 case "plant pine":
-                    _god.PlantTree(indicator.transform.position.x, indicator.transform.position.z);
+                    TerrainPlane.current.PlantTree(indicator.transform.position.x, indicator.transform.position.z);
                     break;
                 case "gw":
                 case "give wood":
@@ -195,8 +190,7 @@ public class Controls : MonoBehaviour
                 case "craft wooden wall":
                     if (_character.inventory.wood >= 3)
                     {
-                        // _god.CraftWoodenWall(indicator.transform.position.x + -4.0f, indicator.transform.position.z + 4.0f);
-                        _god.CraftWoodenWall(indicator.transform.position.x, indicator.transform.position.z);
+                        TerrainPlane.current.CraftWoodenWall(indicator.transform.position.x, indicator.transform.position.z);
                         _character.inventory.wood -= 3;
                     }
                     break;

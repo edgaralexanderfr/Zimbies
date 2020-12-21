@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 585593139}
   - component: {fileID: 585593138}
   - component: {fileID: 585593137}
+  - component: {fileID: 585593141}
   m_Layer: 8
   m_Name: Terrain Plane
   m_TagString: Untagged
@@ -531,6 +532,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &585593141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585593136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750563cfc140d5f49bf0c57bd302de5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
+    type: 3}
+  tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
+  woodenWall: {fileID: 5127394394141839190, guid: 041dfd6cda9398b458bd65da9d290102,
+    type: 3}
 --- !u!1001 &709263757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,11 +692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forestDensity: 4
-  tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
-    type: 3}
-  tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
-  woodenWall: {fileID: 5127394394141839190, guid: 041dfd6cda9398b458bd65da9d290102,
-    type: 3}
 --- !u!1 &902065545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1562f19202cf9574785144b2cbb206cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  god: {fileID: 761600544}
   character: {fileID: 406938036}
   indicator: {fileID: 984611471}
   gun: {fileID: 1265898745}

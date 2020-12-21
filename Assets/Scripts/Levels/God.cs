@@ -5,9 +5,6 @@ using UnityEngine;
 public class God : MonoBehaviour
 {
     public float forestDensity;
-    public GameObject tree1Static;
-    public GameObject tree1;
-    public GameObject woodenWall;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +35,7 @@ public class God : MonoBehaviour
                 {
                     if (Random.Range(0.0f, 1.0f) < 0.8f)
                     {
-                        PlantStaticTree(x, z);
+                        TerrainPlane.current.PlantStaticTree(x, z);
                     }
                 }
             }
@@ -56,24 +53,9 @@ public class God : MonoBehaviour
             x = Random.Range(-30.0f, 30.0f) * 10.0f;
             z = Random.Range(-30.0f, 30.0f) * 10.0f;
 
-            PlantTree(x, z);
+            TerrainPlane.current.PlantTree(x, z);
 
             i++;
         }
-    }
-
-    void PlantStaticTree(float x, float z)
-    {
-        Instantiate(tree1Static, new Vector3(x, tree1Static.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
-    }
-
-    public void PlantTree(float x, float z)
-    {
-        Instantiate(tree1, new Vector3(x, tree1.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
-    }
-
-    public void CraftWoodenWall(float x, float z)
-    {
-        Instantiate(woodenWall, new Vector3(x, woodenWall.transform.position.y, z), Quaternion.identity);
     }
 }
