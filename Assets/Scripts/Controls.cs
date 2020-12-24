@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
+    public static Controls current
+    {
+        get
+        {
+            return m_current;
+        }
+    }
+
+    private static Controls m_current;
+
     public GameObject character;
     public GameObject indicator;
     public GameObject gun;
@@ -19,26 +29,26 @@ public class Controls : MonoBehaviour
     public InputAction melee;
     public InputAction toggleConsole;
     public InputAction enter;
+    public InputAction up;
+    public InputAction down;
 
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
+    private Character m_character;
+    private CharacterController m_characterController;
+    private Animator m_animator;
 
-    private Character _character;
-    private CharacterController _characterController;
-    private Animator _animator;
-    private RectTransform _consoleRectTransform;
-    private bool _console = false;
+    void Awake()
+    {
+        m_current = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _character = character.GetComponent<Character>();
-        _characterController = character.GetComponent<CharacterController>();
-        _animator = character.GetComponent<Animator>();
-        _consoleRectTransform = console.GetComponent<RectTransform>();
-
-        // Set console placeholder:
-        console.placeholder.GetComponent<Text>().text += " v" + Application.version;
+        m_character = character.GetComponent<Character>();
+        m_characterController = character.GetComponent<CharacterController>();
+        m_animator = character.GetComponent<Animator>();
 
         AddEvents();
     }
@@ -49,6 +59,8 @@ public class Controls : MonoBehaviour
         toggleConsole.performed += OnToggleConsolePerformed;
 
         enter.canceled += OnEnterCanceled;
+        up.canceled += OnUpCanceled;
+        down.canceled += OnDownCanceled;
     }
 
     // Update is called once per frame
@@ -68,12 +80,12 @@ public class Controls : MonoBehaviour
         finalVector.x = inputVector.x;
         finalVector.z = inputVector.y;
 
-        _characterController.Move(-finalVector * Time.deltaTime * 30.0f);
+        m_characterController.Move(-finalVector * Time.deltaTime * 30.0f);
 
         // Check if character is meleeing:
         if (meleeing == 0.0f)
         {
-            _character.meleeing = false;
+            m_character.meleeing = false;
 
             // Cancel the melee:
             axe.SetActive(false);
@@ -84,16 +96,16 @@ public class Controls : MonoBehaviour
             // Updates the character's movement animation:
             if (inputVector.x == 0.0f && inputVector.y == 0.0f)
             {
-                _animator.Play("Idle Aiming");
+                m_animator.Play("Idle Aiming");
             }
             else
             {
-                _animator.Play("Walk Aiming");
+                m_animator.Play("Walk Aiming");
             }
         }
         else
         {
-            _character.meleeing = true;
+            m_character.meleeing = true;
 
             // Melee:
             gun.SetActive(false);
@@ -101,7 +113,7 @@ public class Controls : MonoBehaviour
             sheathedGun.SetActive(true);
             axe.SetActive(true);
 
-            _animator.Play("Melee");
+            m_animator.Play("Melee");
         }
     }
 
@@ -138,22 +150,15 @@ public class Controls : MonoBehaviour
 
     void OnToggleConsolePerformed(InputAction.CallbackContext ctx)
     {
-        _console = !_console;
+        GameConsole.current.Toggle();
 
-        if (_console)
+        if (GameConsole.current.Shown)
         {
-            console.ActivateInputField();
-            _consoleRectTransform.localPosition -= Vector3.up * 100;
-
             move.Disable();
             melee.Disable();
         }
         else
         {
-            // TODO: refactor repeated code:
-            console.DeactivateInputField();
-            _consoleRectTransform.localPosition += Vector3.up * 100;
-
             move.Enable();
             melee.Enable();
         }
@@ -161,40 +166,29 @@ public class Controls : MonoBehaviour
 
     void OnEnterCanceled(InputAction.CallbackContext ctx)
     {
-        if (_console)
+        if (GameConsole.current.Shown)
         {
-            // Catch the command:
-            string command = console.text.ToLower();
-            console.text = "";
-
-            // TODO: refactor repeated code:
-            console.DeactivateInputField();
-            _consoleRectTransform.localPosition += Vector3.up * 100;
-            _console = false;
+            GameConsole.current.ExecInputField();
+            GameConsole.current.Hide();
 
             move.Enable();
             melee.Enable();
+        }
+    }
 
-            // Execute the command:
-            switch (command)
-            {
-                case "pp":
-                case "plant pine":
-                    TerrainPlane.current.PlantTree(indicator.transform.position.x, indicator.transform.position.z);
-                    break;
-                case "gw":
-                case "give wood":
-                    _character.inventory.wood += 9;
-                    break;
-                case "cww":
-                case "craft wooden wall":
-                    if (_character.inventory.wood >= 3)
-                    {
-                        TerrainPlane.current.CraftWoodenWall(indicator.transform.position.x, indicator.transform.position.z);
-                        _character.inventory.wood -= 3;
-                    }
-                    break;
-            }
+    void OnUpCanceled(InputAction.CallbackContext ctx)
+    {
+        if (GameConsole.current.Shown)
+        {
+            GameConsole.current.PreviousCmd();
+        }
+    }
+
+    void OnDownCanceled(InputAction.CallbackContext ctx)
+    {
+        if (GameConsole.current.Shown)
+        {
+            GameConsole.current.NextCmd();
         }
     }
 
@@ -206,6 +200,8 @@ public class Controls : MonoBehaviour
         melee.Enable();
         toggleConsole.Enable();
         enter.Enable();
+        up.Enable();
+        down.Enable();
     }
 
     void OnDisable()
@@ -216,5 +212,7 @@ public class Controls : MonoBehaviour
         melee.Disable();
         toggleConsole.Disable();
         enter.Disable();
+        up.Disable();
+        down.Disable();
     }
 }
