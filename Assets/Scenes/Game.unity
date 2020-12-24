@@ -211,8 +211,9 @@ GameObject:
   - component: {fileID: 320610639}
   - component: {fileID: 320610638}
   - component: {fileID: 320610637}
+  - component: {fileID: 320610640}
   m_Layer: 5
-  m_Name: Console
+  m_Name: GameConsole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,6 +340,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320610635}
   m_CullTransparentMesh: 0
+--- !u!114 &320610640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320610635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5c35e3d971eeb41a84a03847025448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayOffset: 100
+  MaxCommands: 5
 --- !u!1 &406938036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: a84d273b17c33ac4da292b7e791de1a3,
@@ -544,10 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750563cfc140d5f49bf0c57bd302de5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
+  Tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
     type: 3}
-  tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
-  woodenWall: {fileID: 5127394394141839190, guid: 041dfd6cda9398b458bd65da9d290102,
+  Tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
+  WoodenWall: {fileID: 5127394394141839190, guid: 041dfd6cda9398b458bd65da9d290102,
     type: 3}
 --- !u!1001 &709263757
 PrefabInstance:
@@ -1306,7 +1321,7 @@ GameObject:
   - component: {fileID: 1171346535}
   - component: {fileID: 1171346534}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1466,6 +1481,38 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Enter
+      m_Flags: 0
+  up:
+    m_Name: Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 089e9c4a-c794-423e-87ce-9835c2ff05d3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6cab9ef3-b593-4db9-8661-1314f3d614f8
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Up
+      m_Flags: 0
+  down:
+    m_Name: Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e0aa689a-6f96-4cd6-9529-930aedf21e0a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 29920ac0-cfdf-45ed-a6d5-a19008cfe3f6
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Down
       m_Flags: 0
 --- !u!4 &1171346535
 Transform:
@@ -1985,7 +2032,7 @@ GameObject:
   - component: {fileID: 2000832560}
   - component: {fileID: 2000832559}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
