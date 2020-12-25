@@ -1,0 +1,30 @@
+{
+	"Insert simple command": {
+		"scope": "csharp",
+		"prefix": "GameConsole.Exec.SimpleCommand",
+		"body": [
+			"",
+			"// $1:",
+			"else if ((shorted = (lowerCaseCmd == \"$2\")) || lowerCaseCmd == \"$3\")",
+			"{",
+			"    $4",
+			"}"
+		],
+		"description": "Insert new simple command within GameConsole.Exec(string cmd). Note: use it right after the last curly braces."
+	},
+	"Insert param command": {
+		"scope": "csharp",
+		"prefix": "GameConsole.Exec.ParamCommand",
+		"body": [
+			"",
+			"// $1:",
+			"else if ((shorted = (lowerCaseCmd.StartsWith(\"$2 \"))) || lowerCaseCmd.StartsWith(\"$3 \"))",
+			"{",
+			"    var instruction = shorted ? \"$4 \" : \"$5 \";",
+			"    var value = ExtractValue<$6>(instruction, cmd);",
+			"    $7",
+			"}"
+		],
+		"description": "Insert new command with parameter within GameConsole.Exec(string cmd). Note: use it right after the last curly braces."
+	}
+}

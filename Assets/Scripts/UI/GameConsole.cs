@@ -16,11 +16,13 @@ public class GameConsole : MonoBehaviour
 
     public bool Shown { get { return m_shown; } }
 
+    #region[Blue] Private Members
     private InputField m_inputField;
     private RectTransform m_rectTransform;
     private bool m_shown;
     private List<string> m_lastCmds = new List<string>();
     private int m_currentCmd = 0;
+    #endregion Private Members
 
     void Awake()
     {
@@ -34,7 +36,7 @@ public class GameConsole : MonoBehaviour
         m_rectTransform = m_inputField.GetComponent<RectTransform>();
 
         // Set console placeholder:
-        m_inputField.placeholder.GetComponent<Text>().text += " v" + Application.version;
+        m_inputField.placeholder.GetComponent<Text>().text += $" v{Application.version}";
     }
 
     public void Toggle()
@@ -73,12 +75,15 @@ public class GameConsole : MonoBehaviour
         var lowerCaseCmd = cmd.ToLower();
         bool shorted = false;
 
+        // You can use GameConsole.Exec.code-snippets
         try
         {
+            // plant pine:
             if ((shorted = (lowerCaseCmd == "pp")) || lowerCaseCmd == "plant pine")
             {
                 TerrainPlane.current.PlantTree(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
             }
+            // craft wooden wall:
             else if ((shorted = (lowerCaseCmd == "cww")) || lowerCaseCmd == "craft wooden wall")
             {
                 if (character != null && character.Inventory.Wood >= 3)
@@ -87,17 +92,20 @@ public class GameConsole : MonoBehaviour
                     character.Inventory.Wood -= 3;
                 }
             }
+            // give wood:
             else if ((shorted = (lowerCaseCmd.StartsWith("gw "))) || lowerCaseCmd.StartsWith("give wood "))
             {
                 var instruction = shorted ? "gw " : "give wood ";
                 character.Inventory.Wood += ExtractValue<int>(instruction, cmd);
             }
+            // take control at:
             else if ((shorted = (lowerCaseCmd.StartsWith("tca "))) || lowerCaseCmd.StartsWith("take control at "))
             {
                 var instruction = shorted ? "tca " : "take control at ";
                 var value = ExtractValue<string>(instruction, cmd);
                 Controls.current.TakeControlAt(value);
             }
+            // spawn character:
             else if ((shorted = (lowerCaseCmd.StartsWith("sc "))) || lowerCaseCmd.StartsWith("spawn character "))
             {
                 var instruction = shorted ? "sc " : "spawn character ";
@@ -105,9 +113,9 @@ public class GameConsole : MonoBehaviour
                 God.current.SpawnCharacter(value, Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
             }
         }
-        catch (FormatException e)
+        catch (FormatException ex)
         {
-            Debug.LogException(e);
+            Debug.LogException(ex);
         }
 
         PushCmd(cmd);
