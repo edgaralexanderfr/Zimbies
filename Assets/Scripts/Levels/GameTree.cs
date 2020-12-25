@@ -1,30 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameTree : MonoBehaviour
 {
-    public GameObject tree1Destroyed;
+    #region[Purple] Settings
+    public GameObject DestroyedTree;
+    #endregion Settings
 
-    private GameObject _characterGameObject;
-    private Character _character;
-    private GameObject _tree1Destroyed;
+    #region[Blue] Private Members
+    private GameObject m_characterGameObject;
+    private Character m_character;
+    private GameObject m_destroyedTree;
+    #endregion Private Members
 
     // Update is called once per frame
     void Update()
     {
-        if (_character && _character.meleeing)
+        if (m_character && m_character.Meleeing)
         {
-            _tree1Destroyed = Instantiate(tree1Destroyed, transform.position, transform.rotation);
+            m_destroyedTree = Instantiate(DestroyedTree, transform.position, transform.rotation);
 
-            var halfTrunk = _tree1Destroyed.transform.Find("HalfTrunk");
-            Physics.IgnoreCollision(_characterGameObject.GetComponent<Collider>(), halfTrunk.GetComponent<Collider>());
+            var halfTrunk = m_destroyedTree.transform.Find("HalfTrunk");
+            Physics.IgnoreCollision(m_characterGameObject.GetComponent<Collider>(), halfTrunk.GetComponent<Collider>());
 
             var rigidbody = halfTrunk.GetComponent<Rigidbody>();
-            rigidbody.AddForce(_characterGameObject.transform.forward * 25.0f, ForceMode.Impulse);
+            rigidbody.AddForce(m_characterGameObject.transform.forward * 25.0f, ForceMode.Impulse);
 
             // Increase character's wood in inventory:
-            _character.inventory.wood++;
+            m_character.Inventory.Wood++;
 
             Destroy(gameObject);
         }
@@ -34,14 +36,14 @@ public class GameTree : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            _characterGameObject = collision.gameObject;
-            _character = collision.gameObject.GetComponent<Character>();
+            m_characterGameObject = collision.gameObject;
+            m_character = collision.gameObject.GetComponent<Character>();
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        _characterGameObject = null;
-        _character = null;
+        m_characterGameObject = null;
+        m_character = null;
     }
 }

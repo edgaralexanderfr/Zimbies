@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameWall : MonoBehaviour
 {
-    public GameObject woodenWallDestroyed;
+    #region[Purple] Settings
+    public GameObject DestroyedWall;
+    #endregion Settings
 
-    private GameObject _characterGameObject;
-    private Character _character;
-    private GameObject _woodenWallDestroyed;
+    #region[Blue] Private Members
+    private GameObject m_characterGameObject;
+    private Character m_character;
+    private GameObject m_woodenWallDestroyed;
+    #endregion Private Members
 
     // Update is called once per frame
     void Update()
     {
-        if (_character && _character.meleeing)
+        if (m_character && m_character.Meleeing)
         {
-            Instantiate(woodenWallDestroyed, transform.position, transform.rotation);
+            Instantiate(DestroyedWall, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -24,14 +26,14 @@ public class GameWall : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            _characterGameObject = collision.gameObject;
-            _character = collision.gameObject.GetComponent<Character>();
+            m_characterGameObject = collision.gameObject;
+            m_character = collision.gameObject.GetComponent<Character>();
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        _characterGameObject = null;
-        _character = null;
+        m_characterGameObject = null;
+        m_character = null;
     }
 }

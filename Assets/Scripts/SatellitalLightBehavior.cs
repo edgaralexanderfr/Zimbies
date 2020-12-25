@@ -1,19 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SatellitalLightBehavior : MonoBehaviour
 {
-    public Light targetLight;
-    public bool disableOnGround = true;
+    #region[Purple] Settings
+    public bool DisableOnGround = true;
+    public Light TargetLight;
+    #endregion Settings
 
     // Update is called once per frame
     void Update()
     {
-        if (disableOnGround && transform.position.y < 0.0f) {
-            targetLight.enabled = false;
+        if (DisableOnGround && transform.position.y < 0.0f) {
+            TargetLight.enabled = false;
         } else {
-            targetLight.enabled = true;
+            TargetLight.enabled = true;
         }
     }
 }

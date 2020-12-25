@@ -1,10 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class God : MonoBehaviour
 {
-    public float forestDensity;
+    public static God current { get { return m_current; } }
+
+    private static God m_current;
+
+    #region[Purple] Settings
+    public GameObject Character;
+    public float ForestDensity;
+    #endregion Settings
+
+    void Awake()
+    {
+        m_current = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -13,18 +23,18 @@ public class God : MonoBehaviour
         PlantInitialTrees();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnCharacter(string name, float x, float z)
     {
-        
+        var character = Instantiate(Character, new Vector3(x, Character.transform.position.y, z), Quaternion.identity);
+        character.name = name;
     }
 
     // Plants the initial surrounding forest
-    void PlantForest()
+    private void PlantForest()
     {
         float terrainSize = 300.0f;
         float treeSize = 20.0f;
-        float forestSize = forestDensity * treeSize;
+        float forestSize = ForestDensity * treeSize;
         float x, z;
 
         for (x = -terrainSize - forestSize; x <= terrainSize + forestSize; x += treeSize)
@@ -43,7 +53,7 @@ public class God : MonoBehaviour
     }
 
     // Experimental:
-    void PlantInitialTrees()
+    private void PlantInitialTrees()
     {
         int i = 1;
         float x, z;

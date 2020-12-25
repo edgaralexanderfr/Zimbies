@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f861620035a75f04da35bc5929e6cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree1Destroyed: {fileID: 4099681077833184110, guid: 7d89e6d2a9c5a3a4c96828610a1d2b79,
+  DestroyedTree: {fileID: 4099681077833184110, guid: 7d89e6d2a9c5a3a4c96828610a1d2b79,
     type: 3}
 --- !u!1 &4964607309168883681
 GameObject:

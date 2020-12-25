@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrbitAround : MonoBehaviour
 {
-    public Vector3 axis;
-    public float speed;
-    public GameObject target;
+    #region[Purple] Settings
+    public Vector3 Axis;
+    public float Speed;
+    public GameObject Target;
+    #endregion Settings
 
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(target.transform.position, axis, speed * Time.deltaTime);
+        transform.RotateAround(Target.transform.position, Axis, Speed * Time.deltaTime);
     }
 }

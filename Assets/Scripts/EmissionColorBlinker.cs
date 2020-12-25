@@ -1,28 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EmissionColorBlinker : MonoBehaviour
 {
-    public Color color;
-    public float speed;
+    #region[Purple] Settings
+    public Color Color;
+    public float Speed;
+    #endregion Settings
 
-    private Material _material;
-    private Color _initialColor;
-    private Color _lerpedColor;
+    #region[Blue] Private Members
+    private Material m_material;
+    private Color m_initialColor;
+    private Color m_lerpedColor;
+    #endregion Private Members
 
     // Start is called before the first frame update
     void Start()
     {
-        _material = GetComponent<Renderer>().material;
-        _initialColor = _material.GetColor("_EmissionColor");
-        _lerpedColor = _initialColor;
+        m_material = GetComponent<Renderer>().material;
+        m_initialColor = m_material.GetColor("_EmissionColor");
+        m_lerpedColor = m_initialColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _lerpedColor = Color.Lerp(_initialColor, color, Mathf.PingPong(Time.time * speed, 1));
-        _material.SetColor("_EmissionColor", _lerpedColor);
+        m_lerpedColor = Color.Lerp(m_initialColor, Color, Mathf.PingPong(Time.time * Speed, 1));
+        m_material.SetColor("_EmissionColor", m_lerpedColor);
     }
 }

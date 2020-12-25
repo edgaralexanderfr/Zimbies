@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75a7eb36a8e88240b0e598904d4612f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodenWallDestroyed: {fileID: 5127394394141839190, guid: 59edcbb6823ba9f44a670bab7b0b8127,
+  DestroyedWall: {fileID: 5127394394141839190, guid: 59edcbb6823ba9f44a670bab7b0b8127,
     type: 3}
 --- !u!1 &5352856574119039232
 GameObject:

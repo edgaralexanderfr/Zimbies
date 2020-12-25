@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     [System.Serializable]
-    public struct Inventory
+    public struct InventoryStruct
     {
-        public int wood;
+        public int Wood;
     }
 
-    public Inventory inventory;
-    public bool meleeing = false;
+    public InventoryStruct Inventory;
+    public bool Meleeing = false;
 }

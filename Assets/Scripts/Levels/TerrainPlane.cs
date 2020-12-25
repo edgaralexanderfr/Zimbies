@@ -4,19 +4,15 @@ public class TerrainPlane : MonoBehaviour
 {
     public const int LAYER_MASK = 1 << 8;
 
-    public GameObject Tree1Static;
-    public GameObject Tree1;
-    public GameObject WoodenWall;
-
-    public static TerrainPlane current
-    {
-        get
-        {
-            return m_current;
-        }
-    }
+    public static TerrainPlane current { get { return m_current; } }
 
     private static TerrainPlane m_current;
+
+    #region[Purple] Settings
+    public GameObject Tree1;
+    public GameObject Tree1Static;
+    public GameObject WoodenWall;
+    #endregion Settings
 
     void Awake()
     {

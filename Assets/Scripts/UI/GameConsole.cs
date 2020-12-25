@@ -1,30 +1,20 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameConsole : MonoBehaviour
 {
-    public static GameConsole current
-    {
-        get
-        {
-            return m_current;
-        }
-    }
+    public static GameConsole current { get { return m_current; } }
 
     private static GameConsole m_current;
 
+    #region[Purple] Settings
     public float DisplayOffset;
     public sbyte MaxCommands;
+    #endregion Settings
 
-    public bool Shown
-    {
-        get
-        {
-            return m_shown;
-        }
-    }
+    public bool Shown { get { return m_shown; } }
 
     private InputField m_inputField;
     private RectTransform m_rectTransform;
@@ -49,9 +39,7 @@ public class GameConsole : MonoBehaviour
 
     public void Toggle()
     {
-        m_shown = !m_shown;
-
-        if (m_shown) Show(); else Hide();
+        if (!m_shown) Show(); else Hide();
     }
 
     public void Show()
@@ -82,28 +70,44 @@ public class GameConsole : MonoBehaviour
     public void Exec(string cmd)
     {
         var character = GetPlayerCharacterScript();
+        var lowerCaseCmd = cmd.ToLower();
+        bool shorted = false;
 
-        switch (cmd.ToLower())
+        try
         {
-            case "pp":
-            case "plant pine":
-                TerrainPlane.current.PlantTree(Controls.current.indicator.transform.position.x, Controls.current.indicator.transform.position.z);
-                break;
-            case "gw":
-            case "give wood":
-                if (character != null)
+            if ((shorted = (lowerCaseCmd == "pp")) || lowerCaseCmd == "plant pine")
+            {
+                TerrainPlane.current.PlantTree(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+            }
+            else if ((shorted = (lowerCaseCmd == "cww")) || lowerCaseCmd == "craft wooden wall")
+            {
+                if (character != null && character.Inventory.Wood >= 3)
                 {
-                    character.inventory.wood += 9;
+                    TerrainPlane.current.CraftWoodenWall(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+                    character.Inventory.Wood -= 3;
                 }
-                break;
-            case "cww":
-            case "craft wooden wall":
-                if (character != null && character.inventory.wood >= 3)
-                {
-                    TerrainPlane.current.CraftWoodenWall(Controls.current.indicator.transform.position.x, Controls.current.indicator.transform.position.z);
-                    character.inventory.wood -= 3;
-                }
-                break;
+            }
+            else if ((shorted = (lowerCaseCmd.StartsWith("gw "))) || lowerCaseCmd.StartsWith("give wood "))
+            {
+                var instruction = shorted ? "gw " : "give wood ";
+                character.Inventory.Wood += ExtractValue<int>(instruction, cmd);
+            }
+            else if ((shorted = (lowerCaseCmd.StartsWith("tca "))) || lowerCaseCmd.StartsWith("take control at "))
+            {
+                var instruction = shorted ? "tca " : "take control at ";
+                var value = ExtractValue<string>(instruction, cmd);
+                Controls.current.TakeControlAt(value);
+            }
+            else if ((shorted = (lowerCaseCmd.StartsWith("sc "))) || lowerCaseCmd.StartsWith("spawn character "))
+            {
+                var instruction = shorted ? "sc " : "spawn character ";
+                var value = ExtractValue<string>(instruction, cmd);
+                God.current.SpawnCharacter(value, Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+            }
+        }
+        catch (FormatException e)
+        {
+            Debug.LogException(e);
         }
 
         PushCmd(cmd);
@@ -153,5 +157,12 @@ public class GameConsole : MonoBehaviour
         if (m_lastCmds.Count >= MaxCommands) m_lastCmds.RemoveAt(0);
 
         m_lastCmds.Add(cmd);
+    }
+
+    private T ExtractValue<T>(string cmd, string input)
+    {
+        var value = input.Substring(cmd.Length, input.Length - cmd.Length);
+
+        return (T) Convert.ChangeType(value, typeof(T));
     }
 }

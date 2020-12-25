@@ -1,4 +1,9 @@
-﻿{
+{
+    "coloredRegions.namedColors": {
+        "Blue": "rgba(52, 152, 219, 0.1)",
+        "Green": "rgba(26, 188, 156, 0.1)",
+        "Purple": "rgba(79, 44, 115, 0.1)"
+    },
     "files.exclude":
     {
         "**/.DS_Store":true,

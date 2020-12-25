@@ -1,42 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
-    public static Controls current
-    {
-        get
-        {
-            return m_current;
-        }
-    }
+    public static Controls current { get { return m_current; } }
 
     private static Controls m_current;
 
-    public GameObject character;
-    public GameObject indicator;
-    public GameObject gun;
-    public GameObject axe;
-    public GameObject sheathedAxe;
-    public GameObject sheathedGun;
-    public InputField console;
-    public InputAction move;
-    public InputAction lookX;
-    public InputAction lookY;
-    public InputAction melee;
-    public InputAction toggleConsole;
-    public InputAction enter;
-    public InputAction up;
-    public InputAction down;
+    #region[Purple] Settings
+    public GameObject Indicator;
+    #endregion Settings
 
+    #region[Green] Input Actions
+    public InputAction Move;
+    public InputAction LookX;
+    public InputAction LookY;
+    public InputAction Melee;
+    public InputAction ToggleConsole;
+    public InputAction Enter;
+    public InputAction Up;
+    public InputAction Down;
+    #endregion Input Actions
+
+    #region[Blue] Private Members
     private int halfScreenWidth = Screen.width / 2;
     private int halfScreenHeight = Screen.height / 2;
+    private GameObject m_characterGameObject;
+    private GameObject m_gun;
+    private GameObject m_axe;
+    private GameObject m_sheathedAxe;
+    private GameObject m_sheathedGun;
     private Character m_character;
     private CharacterController m_characterController;
     private Animator m_animator;
+    #endregion Private Members
 
     void Awake()
     {
@@ -46,21 +43,18 @@ public class Controls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_character = character.GetComponent<Character>();
-        m_characterController = character.GetComponent<CharacterController>();
-        m_animator = character.GetComponent<Animator>();
-
         AddEvents();
+        TakeControlAt("Player 1");
     }
 
     void AddEvents()
     {
         // Console events:
-        toggleConsole.performed += OnToggleConsolePerformed;
+        ToggleConsole.performed += OnToggleConsolePerformed;
 
-        enter.canceled += OnEnterCanceled;
-        up.canceled += OnUpCanceled;
-        down.canceled += OnDownCanceled;
+        Enter.canceled += OnEnterCanceled;
+        Up.canceled += OnUpCanceled;
+        Down.canceled += OnDownCanceled;
     }
 
     // Update is called once per frame
@@ -70,11 +64,44 @@ public class Controls : MonoBehaviour
         UpdateLook();
     }
 
-    // Updates the player's character movement based on the move controls input
-    void UpdateMove()
+    public void TakeControlAtCurrentPlayer()
     {
-        var inputVector = move.ReadValue<Vector2>();
-        float meleeing = melee.ReadValue<float>();
+        var character = GameObject.FindWithTag("Player");
+
+        if (character) TakeControlAt(character);
+    }
+
+    public void TakeControlAt(string name)
+    {
+        var character = GameObject.Find(name);
+
+        if (character) TakeControlAt(character);
+    }
+
+    public void TakeControlAt(GameObject character)
+    {
+        character.tag = "Player";
+        if (m_characterGameObject) m_characterGameObject.tag = "Untagged";
+
+        m_characterGameObject = character;
+
+        m_gun = character.transform.Find("Armature/Torso/R_Arm/R_Hand/Gun").gameObject;
+        m_axe = character.transform.Find("Armature/Torso/R_Arm/R_Hand/Axe").gameObject;
+        m_sheathedAxe = character.transform.Find("Body/Sheathed Axe").gameObject;
+        m_sheathedGun = character.transform.Find("Body/Sheathed Gun").gameObject;
+
+        m_character = character.GetComponent<Character>();
+        m_characterController = character.GetComponent<CharacterController>();
+        m_animator = character.GetComponent<Animator>();
+
+        Follower.current.Target = character;
+    }
+
+    // Updates the player's character movement based on the move controls input
+    private void UpdateMove()
+    {
+        var inputVector = Move.ReadValue<Vector2>();
+        float meleeing = Melee.ReadValue<float>();
         var finalVector = new Vector3();
 
         finalVector.x = inputVector.x;
@@ -85,13 +112,13 @@ public class Controls : MonoBehaviour
         // Check if character is meleeing:
         if (meleeing == 0.0f)
         {
-            m_character.meleeing = false;
+            m_character.Meleeing = false;
 
             // Cancel the melee:
-            axe.SetActive(false);
-            sheathedGun.SetActive(false);
-            sheathedAxe.SetActive(true);
-            gun.SetActive(true);
+            m_axe.SetActive(false);
+            m_sheathedGun.SetActive(false);
+            m_sheathedAxe.SetActive(true);
+            m_gun.SetActive(true);
 
             // Updates the character's movement animation:
             if (inputVector.x == 0.0f && inputVector.y == 0.0f)
@@ -105,23 +132,23 @@ public class Controls : MonoBehaviour
         }
         else
         {
-            m_character.meleeing = true;
+            m_character.Meleeing = true;
 
             // Melee:
-            gun.SetActive(false);
-            sheathedAxe.SetActive(false);
-            sheathedGun.SetActive(true);
-            axe.SetActive(true);
+            m_gun.SetActive(false);
+            m_sheathedAxe.SetActive(false);
+            m_sheathedGun.SetActive(true);
+            m_axe.SetActive(true);
 
             m_animator.Play("Melee");
         }
     }
 
     // Updates the player's character look based on the look controls input
-    void UpdateLook()
+    private void UpdateLook()
     {
-        float mouseX = lookX.ReadValue<float>();
-        float mouseY = lookY.ReadValue<float>();
+        float mouseX = LookX.ReadValue<float>();
+        float mouseY = LookY.ReadValue<float>();
 
         var target = new Vector3(
             -mouseX + halfScreenWidth,
@@ -129,7 +156,7 @@ public class Controls : MonoBehaviour
             -mouseY + halfScreenHeight
         );
 
-        character.transform.LookAt(character.transform.position + target);
+        m_characterGameObject.transform.LookAt(m_characterGameObject.transform.position + target);
 
         // Updates the indicator's position:
         var ray = Camera.main.ScreenPointToRay(new Vector3(mouseX, mouseY, 0.0f));
@@ -140,9 +167,9 @@ public class Controls : MonoBehaviour
             float indicatorX = Mathf.Floor(hit.point.x / 10.0f) * 10.0f + 5.0f;
             float indicatorZ = Mathf.Floor(hit.point.z / 10.0f) * 10.0f + 5.0f;
 
-            indicator.transform.position = new Vector3(
+            Indicator.transform.position = new Vector3(
                 indicatorX,
-                indicator.transform.position.y,
+                Indicator.transform.position.y,
                 indicatorZ
             );
         }
@@ -154,13 +181,13 @@ public class Controls : MonoBehaviour
 
         if (GameConsole.current.Shown)
         {
-            move.Disable();
-            melee.Disable();
+            Move.Disable();
+            Melee.Disable();
         }
         else
         {
-            move.Enable();
-            melee.Enable();
+            Move.Enable();
+            Melee.Enable();
         }
     }
 
@@ -171,8 +198,8 @@ public class Controls : MonoBehaviour
             GameConsole.current.ExecInputField();
             GameConsole.current.Hide();
 
-            move.Enable();
-            melee.Enable();
+            Move.Enable();
+            Melee.Enable();
         }
     }
 
@@ -194,25 +221,25 @@ public class Controls : MonoBehaviour
 
     void OnEnable()
     {
-        move.Enable();
-        lookX.Enable();
-        lookY.Enable();
-        melee.Enable();
-        toggleConsole.Enable();
-        enter.Enable();
-        up.Enable();
-        down.Enable();
+        Move.Enable();
+        LookX.Enable();
+        LookY.Enable();
+        Melee.Enable();
+        ToggleConsole.Enable();
+        Enter.Enable();
+        Up.Enable();
+        Down.Enable();
     }
 
     void OnDisable()
     {
-        move.Disable();
-        lookX.Disable();
-        lookY.Disable();
-        melee.Disable();
-        toggleConsole.Disable();
-        enter.Disable();
-        up.Disable();
-        down.Disable();
+        Move.Disable();
+        LookX.Disable();
+        LookY.Disable();
+        Melee.Disable();
+        ToggleConsole.Disable();
+        Enter.Disable();
+        Up.Disable();
+        Down.Disable();
     }
 }
