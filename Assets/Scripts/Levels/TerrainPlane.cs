@@ -7,6 +7,7 @@ public class TerrainPlane : MonoBehaviour
     public static TerrainPlane current { get { return m_current; } }
 
     private static TerrainPlane m_current;
+    private static int[] m_fixedAngles = {0, 90, 180, 270};
 
     #region[Purple] Settings
     public GameObject Tree1;
@@ -31,6 +32,6 @@ public class TerrainPlane : MonoBehaviour
 
     public void CraftWoodenWall(float x, float z)
     {
-        Instantiate(WoodenWall, new Vector3(x, WoodenWall.transform.position.y, z), Quaternion.identity);
+        Instantiate(WoodenWall, new Vector3(x, WoodenWall.transform.position.y, z), Quaternion.Euler(-90.0f, m_fixedAngles[Random.Range(0, m_fixedAngles.Length - 1)], 0.0f));
     }
 }
