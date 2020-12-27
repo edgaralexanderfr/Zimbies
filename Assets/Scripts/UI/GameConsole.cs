@@ -10,6 +10,7 @@ public class GameConsole : MonoBehaviour
     private static GameConsole m_current;
 
     #region[Purple] Settings
+    public Text OutputText;
     public float DisplayOffset;
     public sbyte MaxCommands;
     #endregion Settings
@@ -37,6 +38,9 @@ public class GameConsole : MonoBehaviour
 
         // Set console placeholder:
         m_inputField.placeholder.GetComponent<Text>().text += $" v{Application.version}";
+
+        // Set console initial output:
+        OutputText.text = Debug.isDebugBuild ? OutputText.text + $" {Application.version}" : "";
     }
 
     public void Toggle()
@@ -92,6 +96,14 @@ public class GameConsole : MonoBehaviour
                     character.Inventory.Wood -= 3;
                 }
             }
+            // print player.inventory.wood:
+            else if ((shorted = (lowerCaseCmd == "ppiw")) || lowerCaseCmd == "print player.inventory.wood")
+            {
+                if (character != null)
+                {
+                    OutputText.text = $"Player.Inventory.Wood: {character.Inventory.Wood}";
+                }
+            }
             // give wood:
             else if ((shorted = (lowerCaseCmd.StartsWith("gw "))) || lowerCaseCmd.StartsWith("give wood "))
             {
@@ -111,6 +123,13 @@ public class GameConsole : MonoBehaviour
                 var instruction = shorted ? "sc " : "spawn character ";
                 var value = ExtractValue<string>(instruction, cmd);
                 God.current.SpawnCharacter(value, Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+            }
+            // print:
+            else if ((shorted = (lowerCaseCmd.StartsWith("p "))) || lowerCaseCmd.StartsWith("print "))
+            {
+                var instruction = shorted ? "p " : "print ";
+                var value = ExtractValue<string>(instruction, cmd);
+                OutputText.text = value;
             }
         }
         catch (FormatException ex)
