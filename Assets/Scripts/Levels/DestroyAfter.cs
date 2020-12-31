@@ -48,7 +48,7 @@ public class DestroyAfter : MonoBehaviour
 
     private void UpdateTime()
     {
-        if (m_time >= Time) Destroy(gameObject);
+        if (m_time >= Time) TerrainPlane.current.DestroyGameObject(gameObject);
 
         m_time += UnityEngine.Time.deltaTime;
     }

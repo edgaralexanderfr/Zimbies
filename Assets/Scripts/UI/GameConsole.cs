@@ -104,6 +104,14 @@ public class GameConsole : MonoBehaviour
                     OutputText.text = $"Player.Inventory.Wood: {character.Inventory.Wood}";
                 }
             }
+            // flash:
+            else if ((shorted = (lowerCaseCmd == "f")) || lowerCaseCmd == "flash")
+            {
+                if (character != null)
+                {
+                    character.Speed = 200.0f;
+                }
+            }
             // give wood:
             else if ((shorted = (lowerCaseCmd.StartsWith("gw "))) || lowerCaseCmd.StartsWith("give wood "))
             {

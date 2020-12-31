@@ -10,4 +10,5 @@ public class Character : MonoBehaviour
 
     public InventoryStruct Inventory;
     public bool Meleeing = false;
+    public float Speed = 30.0f;
 }

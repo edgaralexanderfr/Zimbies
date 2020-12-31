@@ -107,7 +107,7 @@ public class Controls : MonoBehaviour
         finalVector.x = inputVector.x;
         finalVector.z = inputVector.y;
 
-        m_characterController.Move(-finalVector * Time.deltaTime * 30.0f);
+        m_characterController.Move(-finalVector * Time.deltaTime * m_character.Speed);
 
         // Check if character is meleeing:
         if (meleeing == 0.0f)

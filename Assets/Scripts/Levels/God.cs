@@ -45,7 +45,7 @@ public class God : MonoBehaviour
                 {
                     if (Random.Range(0.0f, 1.0f) < 0.8f)
                     {
-                        TerrainPlane.current.PlantStaticTree(x, z);
+                        TerrainPlane.current.PlantStaticTree(x + 5.0f, z + 5.0f);
                     }
                 }
             }
@@ -60,8 +60,8 @@ public class God : MonoBehaviour
 
         while (i <= 64)
         {
-            x = Random.Range(-30.0f, 30.0f) * 10.0f;
-            z = Random.Range(-30.0f, 30.0f) * 10.0f;
+            x = Random.Range(-30, 30) * 10.0f + 5.0f;
+            z = Random.Range(-30, 30) * 10.0f + 5.0f;
 
             TerrainPlane.current.PlantTree(x, z);
 
