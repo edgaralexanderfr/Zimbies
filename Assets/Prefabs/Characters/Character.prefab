@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505394396012701309}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2394367966127662372}
   - component: {fileID: 6877493096900497064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shoes1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8822100973243389888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6941704825859083584}
   - component: {fileID: 7957142312479282716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hair1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5225444558658764091}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6722902876149026579}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3621357915718216739}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5120200776412337333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5820113223371783262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6607722337139070844}
   - component: {fileID: 1550829080776407620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pants1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721679217247422753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3251292954273782478}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3450638565700147730}
   - component: {fileID: 6619888827334493280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,8 +671,8 @@ GameObject:
   - component: {fileID: 4058438514422677238}
   - component: {fileID: 4058438514422677242}
   - component: {fileID: 4058438514422677237}
-  m_Layer: 0
-  m_Name: Player 1
+  m_Layer: 9
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,6 +782,7 @@ MonoBehaviour:
   Inventory:
     Wood: 0
   Meleeing: 0
+  Speed: 30
 --- !u!1 &5972862973682901241
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8628188726779214450}
   - component: {fileID: 3263739829287180466}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Jacket1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5560105227445961909}
   - component: {fileID: 1726290169957490138}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shirt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3786070730865787010}
   - component: {fileID: 3869859857065294499}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636964131391707513}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 583751276791937827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,7 +1135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906527176748640480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7580059363782946730}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8435049727841223692}
   - component: {fileID: 3367487637062628099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1290,6 +1291,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8435049727841223692}
     m_Modifications:
+    - target: {fileID: 1491353955502906521, guid: cb2bcf98576500647878950fa846b2b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6893363646291006064, guid: cb2bcf98576500647878950fa846b2b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -1364,6 +1370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sheathed Axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634019656790089827, guid: cb2bcf98576500647878950fa846b2b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7634019656790089827, guid: cb2bcf98576500647878950fa846b2b0,
         type: 3}
@@ -1462,8 +1473,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 23841e95fb0ddb14b96cccf67eeacb29,
         type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 23841e95fb0ddb14b96cccf67eeacb29,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501786599240170428, guid: 23841e95fb0ddb14b96cccf67eeacb29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23841e95fb0ddb14b96cccf67eeacb29, type: 3}
@@ -1557,8 +1578,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 23841e95fb0ddb14b96cccf67eeacb29,
         type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 23841e95fb0ddb14b96cccf67eeacb29,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501786599240170428, guid: 23841e95fb0ddb14b96cccf67eeacb29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23841e95fb0ddb14b96cccf67eeacb29, type: 3}
@@ -1575,6 +1606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7580059363782946730}
     m_Modifications:
+    - target: {fileID: 1491353955502906521, guid: cb2bcf98576500647878950fa846b2b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6893363646291006064, guid: cb2bcf98576500647878950fa846b2b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -1649,6 +1685,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634019656790089827, guid: cb2bcf98576500647878950fa846b2b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7634019656790089827, guid: cb2bcf98576500647878950fa846b2b0,
         type: 3}

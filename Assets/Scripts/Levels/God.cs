@@ -8,6 +8,7 @@ public class God : MonoBehaviour
 
     #region[Purple] Settings
     public GameObject Character;
+    public GameObject Zombie1;
     public float ForestDensity;
     #endregion Settings
 
@@ -27,6 +28,14 @@ public class God : MonoBehaviour
     {
         var character = Instantiate(Character, new Vector3(x, Character.transform.position.y, z), Quaternion.identity);
         character.name = name;
+    }
+
+    public void SpawnZombie(Zombie.Modes mode, float x, float z)
+    {
+        var zombieGameObject = Instantiate(Zombie1, new Vector3(x, Character.transform.position.y, z), Quaternion.identity);
+        var zombie = zombieGameObject.GetComponent<Zombie>();
+
+        if (zombie) zombie.Mode = mode;
     }
 
     // Plants the initial surrounding forest

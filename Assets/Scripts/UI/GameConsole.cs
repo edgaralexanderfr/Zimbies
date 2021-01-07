@@ -112,6 +112,16 @@ public class GameConsole : MonoBehaviour
                     character.Speed = 200.0f;
                 }
             }
+            // spawn zombie active:
+            else if ((shorted = (lowerCaseCmd == "sza")) || lowerCaseCmd == "spawn zombie active")
+            {
+                God.current.SpawnZombie(Zombie.Modes.Active, Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+            }
+            // spawn zombie passive:
+            else if ((shorted = (lowerCaseCmd == "szp")) || lowerCaseCmd == "spawn zombie passive")
+            {
+                God.current.SpawnZombie(Zombie.Modes.Passive, Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+            }
             // give wood:
             else if ((shorted = (lowerCaseCmd.StartsWith("gw "))) || lowerCaseCmd.StartsWith("give wood "))
             {

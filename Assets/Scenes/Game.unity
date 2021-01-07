@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 585593141}
   m_Layer: 8
   m_Name: Terrain Plane
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -610,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Character: {fileID: 5436853302062379196, guid: 4ec9a30475b121949a4119bdc7f2ffc0,
     type: 3}
+  Zombie1: {fileID: 7144573729070202411, guid: 4cb2564d3a0e22c46a766465d4b6dfca, type: 3}
   ForestDensity: 4
 --- !u!1 &963194225
 GameObject:
@@ -712,6 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3b336e08fd93d4eba06aec55567d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  TargetColor: {r: 0, g: 0, b: 0, a: 0}
   Speed: 1.5
 --- !u!114 &984611476
 MonoBehaviour:
