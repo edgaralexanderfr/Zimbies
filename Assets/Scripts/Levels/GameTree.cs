@@ -2,6 +2,10 @@
 
 public class GameTree : MonoBehaviour
 {
+    public const byte TYPE_ANY = 0;
+    public const byte TYPE_PINE = 1;
+    public const byte TYPE_DECIDUOUS = 2;
+
     #region[Purple] Settings
     public GameObject DestroyedTree;
     #endregion Settings

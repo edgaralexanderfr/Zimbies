@@ -85,7 +85,12 @@ public class GameConsole : MonoBehaviour
             // plant pine:
             if ((shorted = (lowerCaseCmd == "pp")) || lowerCaseCmd == "plant pine")
             {
-                TerrainPlane.current.PlantTree(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z);
+                TerrainPlane.current.PlantTree(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z, GameTree.TYPE_PINE);
+            }
+            // plant deciduous tree:
+            if ((shorted = (lowerCaseCmd == "pdt")) || lowerCaseCmd == "plant deciduous tree")
+            {
+                TerrainPlane.current.PlantTree(Controls.current.Indicator.transform.position.x, Controls.current.Indicator.transform.position.z, GameTree.TYPE_DECIDUOUS);
             }
             // craft wooden wall:
             else if ((shorted = (lowerCaseCmd == "cww")) || lowerCaseCmd == "craft wooden wall")

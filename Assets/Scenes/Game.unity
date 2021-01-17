@@ -464,6 +464,9 @@ MonoBehaviour:
   Tree1: {fileID: 4099681077833184110, guid: 0ef99783ac2c2344682080809b775481, type: 3}
   Tree1Static: {fileID: 4099681077833184110, guid: 4f3aaea213cc2ee4ab8eef574d41b6db,
     type: 3}
+  Tree2: {fileID: 3449706149920342823, guid: c5e913a776f396e408dab2d5e2dba25d, type: 3}
+  Tree2Static: {fileID: 3449706149920342823, guid: edb5f48bb0c6145419d0b01b247d1714,
+    type: 3}
   WoodenWall: {fileID: 3524042722346160659, guid: 5e1948551c5191e49bfb3b9f14e0d519,
     type: 3}
 --- !u!1001 &709263757
@@ -1588,6 +1591,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436853302062379196, guid: 4ec9a30475b121949a4119bdc7f2ffc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9018683229208609455, guid: 4ec9a30475b121949a4119bdc7f2ffc0,
         type: 3}

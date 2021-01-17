@@ -14,6 +14,8 @@ public class TerrainPlane : MonoBehaviour
     #region[Purple] Settings
     public GameObject Tree1;
     public GameObject Tree1Static;
+    public GameObject Tree2;
+    public GameObject Tree2Static;
     public GameObject WoodenWall;
     #endregion Settings
 
@@ -51,18 +53,22 @@ public class TerrainPlane : MonoBehaviour
         SetGameObjectAt(null, x, z);
     }
 
-    public GameObject PlantStaticTree(float x, float z)
+    public GameObject PlantStaticTree(float x, float z, byte type = GameTree.TYPE_ANY)
     {
-        return Instantiate(Tree1Static, new Vector3(x, Tree1Static.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
+        GameObject lgameObject = GetTreeGameObjectFromType(type, true);
+
+        return Instantiate(lgameObject, new Vector3(x, lgameObject.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
     }
 
-    public GameObject PlantTree(float x, float z)
+    public GameObject PlantTree(float x, float z, byte type = GameTree.TYPE_ANY)
     {
         GameObject tree = null;
 
         if (!IsPlaceOccupied(x, z))
         {
-            tree = Instantiate(Tree1, new Vector3(x, Tree1.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
+            GameObject lgameObject = GetTreeGameObjectFromType(type, false);
+
+            tree = Instantiate(lgameObject, new Vector3(x, lgameObject.transform.position.y, z), Quaternion.Euler(-90.0f, Random.Range(0.0f, 360.0f), 0.0f));
             SetGameObjectAt(tree, x, z);
         }
 
@@ -80,6 +86,33 @@ public class TerrainPlane : MonoBehaviour
         }
 
         return woodenWall;
+    }
+
+    private GameObject GetTreeGameObjectFromType(byte type, bool isStatic)
+    {
+        GameObject lgameObject;
+
+        switch (type)
+        {
+            case GameTree.TYPE_PINE:
+                lgameObject = isStatic ? Tree1Static : Tree1;
+                break;
+            case GameTree.TYPE_DECIDUOUS:
+                lgameObject = isStatic ? Tree2Static : Tree2;
+                break;
+            default:
+                if (Random.Range(0.0f, 1.0f) <= 0.65f)
+                {
+                    lgameObject = isStatic ? Tree1Static : Tree1;
+                }
+                else
+                {
+                    lgameObject = isStatic ? Tree2Static : Tree2;
+                }
+                break;
+        }
+
+        return lgameObject;
     }
 
     private void SetGameObjectAt(GameObject lgameObject, float x, float z)
